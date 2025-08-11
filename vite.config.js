@@ -4,8 +4,18 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(),],
-  server:{
+  plugins: [react(), tailwindcss()],
+  server: {
     port: 3000,
+  },
+  build: {
+    rollupOptions: {
+      external: [],
+    },
+    target: 'es2015',
+    minify: 'esbuild',
+  },
+  optimizeDeps: {
+    exclude: ['@rollup/rollup-linux-x64-gnu']
   }
 })

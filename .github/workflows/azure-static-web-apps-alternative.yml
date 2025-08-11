@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Azure Static Web Apps CI/CD (Alternative)
 
 on:
   push:
@@ -25,21 +25,14 @@ jobs:
           node-version: '20'
           cache: 'npm'
       
-      - name: Clear npm cache
-        run: npm cache clean --force
+      - name: Install dependencies with legacy peer deps
+        run: npm install --legacy-peer-deps
       
-      - name: Remove existing node_modules and package-lock
+      - name: Build with specific platform
         run: |
-          rm -rf node_modules
-          rm -f package-lock.json
-      
-      - name: Install dependencies
-        run: npm install
-      
-      - name: Build
-        run: npm run build
-        env:
-          NODE_OPTIONS: "--max-old-space-size=4096"
+          export npm_config_platform=linux
+          export npm_config_arch=x64
+          npm run build
       
       - name: Deploy
         uses: Azure/static-web-apps-deploy@v1
