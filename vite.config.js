@@ -9,13 +9,19 @@ export default defineConfig({
     port: 3000,
   },
   build: {
-    rollupOptions: {
-      external: [],
-    },
+    // Ensure compatibility with Azure Static Web Apps
     target: 'es2015',
-    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+    // Optimize for static hosting
+    assetsInlineLimit: 4096,
+    chunkSizeWarningLimit: 1000,
   },
+  // Ensure proper module resolution
   optimizeDeps: {
-    exclude: ['@rollup/rollup-linux-x64-gnu']
-  }
+    include: ['react', 'react-dom', 'react-router-dom'],
+  },
 })
