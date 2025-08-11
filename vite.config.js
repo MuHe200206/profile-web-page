@@ -9,14 +9,21 @@ export default defineConfig({
     port: 3000,
   },
   build: {
-    // Ensure compatibility with Azure Static Web Apps
+    // Optimized for Azure App Service
     target: 'es2015',
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: undefined,
+        assetFileNames: 'assets/[name].[hash].[ext]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
       },
     },
-    // Optimize for static hosting
+    // Ensure proper asset handling
     assetsInlineLimit: 4096,
     chunkSizeWarningLimit: 1000,
   },
