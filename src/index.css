@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Underdog&display=swap');
+
+/* @font-face {
+  font-family: "Underdog";
+  src: url('../src/assets/font/Underdog-Regular.ttf');
+} */
+
+@import "tailwindcss";
+
+
+
+
+@theme {
+  --font-display: "Underdog", "sans-serif"; 
+}
